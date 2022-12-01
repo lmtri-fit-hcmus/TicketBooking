@@ -8,7 +8,8 @@ import {
   Button,
   TouchableOpacity
 } from 'react-native';
-
+import styles from './style';
+const seatPrice = [45000,60000,100000];
 
 const Seat: () => Node = (props) =>{
   brdColor = props.brdColor
@@ -17,11 +18,11 @@ const Seat: () => Node = (props) =>{
   const onPress = () => {
     setPicked((isPicked == 0)?1:0);
     if(!isPicked){
-      props._psh(45);
+      props._psh(seatPrice[props.isVip]);
       props._addSeat(0,props.name);
     }
     else{
-      props._psh(-45);
+      props._psh(-seatPrice[props.isVip]);
       props._addSeat(1,props.name);
     }
   }
@@ -40,17 +41,17 @@ const Seat: () => Node = (props) =>{
 const SeatRow: () => Node = (props) =>{
   return(
     <View style = {{ flexDirection: "row"}} >
-        <Seat name = {props.char+1} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor} _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+2} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh}_addSeat = {props.addSeat}/>
-        <Seat name = {props.char+3} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+4} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor} _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+5} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+6} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+7} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+8} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+9} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+10} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
-        <Seat name = {props.char+11} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+1} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor} _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+2} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh}_addSeat = {props.addSeat}/>
+        <Seat name = {props.char+3} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+4} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor} _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+5} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+6} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+7} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+8} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+9} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+10} isVip = {props.isVip} brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
+        <Seat name = {props.char+11} isVip = {props.isVip}brdColor = {props.brdColor} bkgrColor = {props.bkgrColor}  _psh = {props.psh} _addSeat = {props.addSeat}/>
       </View>
   );
 }
@@ -89,33 +90,43 @@ const Descrip: () => Node = (props) =>{
 }
 
 const Footer: (props) => Node = (props) =>{
+  const _ = () =>{
+    let l = '';
+    for(const i in props._listSeat){
+      l+=props._listSeat[i];
+      if(i!=(props._listSeat).length-1)
+      l+=', ';
+    }
+    return l;
+  }
+  const list = _();
   return(
   <View style = {{flexDirection: 'row', flex: 1}}>
-    <TouchableOpacity style = {footer.click_btn}>
+    <TouchableOpacity style = {styles.footer_click_btn}>
       <Text style = {{color: 'white',textAlign: "center", fontSize: 15}}>PREV</Text>
     </TouchableOpacity>
 
-    <View></View>
+    <View style={{flexDirection:'column', flex: 0.6}}>
+      <View style = {[styles.footer_text_box], {flex: 0.7, marginTop: 20, marginLeft: 10, borderBottomWidth:1}}>
+        <Text>Rạp: {props._prevProps[0]}</Text>
+        <Text>Phòng Chiếu: {props._prevProps[1]}</Text>
+        <Text>Xuất Chiếu: {props._prevProps[2]}</Text>
+        <Text>Ghế: {list}  </Text>
+      </View>
 
-    <View style = {footer.text_box}>
-      <Text>Rạp: </Text>
-      <Text>Phòng Chiếu: </Text>
-      <Text>Xuất Chiếu: </Text>
-      <Text>Ghế: {props._listSeat}  </Text>
+      <View style = {[styles.footer_text_box], {flex: 0.3, margin: 10,}}>
+        <Text>Tổng: {props._total} </Text>
+      </View>
     </View>
 
-    <View style = {footer.text_box}>
-      <Text>Tổng: {props._total} </Text>
-    </View>
-
-    <TouchableOpacity style = {footer.click_btn}>
+    <TouchableOpacity style = {styles.footer_click_btn}>
       <Text style = {{color: 'white',textAlign: "center", fontSize: 15}}>NEXT</Text>
     </TouchableOpacity>
   </View>
   );
 }
 
-const BookSeat: () => Node = () => {
+const BookSeat: () => Node = (props) => {
   const [total, pushTotal] = useState(0);
   const [selectedSeat, changeSelectedSeat] = useState([]);
   const handleChangeTotal = (n) => {
@@ -135,79 +146,27 @@ const BookSeat: () => Node = () => {
       <Text style = {styles.screen}>SCREEN</Text> 
       <ScrollView  style = {{borderWidth: 1,flex: 1 }} horizontal = {true}>
         <ScrollView>
-          <SeatRow char='A' brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='B' brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='C' brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='D' brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='E' brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='F' brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='G' brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='H' brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='J' brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='K' brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
-          <SeatRow char='L' bkgrColor='pink' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='A' isVip = {0} brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='B' isVip = {0} brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='C' isVip = {0} brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='D' isVip = {0} brdColor='green' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='E' isVip = {1} brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='F' isVip = {1} brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='G' isVip = {1} brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='H' isVip = {1} brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='J' isVip = {1} brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='K' isVip = {1} brdColor='red' psh={handleChangeTotal} addSeat={handleAddSeat}/>
+          <SeatRow char='L' isVip = {2} bkgrColor='pink' psh={handleChangeTotal} addSeat={handleAddSeat}/>
         </ScrollView>
       </ScrollView>
       <View style = {styles.description}>
         <Descrip/>
       </View>
-      <View style = {footer.container}>
-        <Footer _total={total} _listSeat={selectedSeat}/>
+      <View style = {styles.footer_container}>
+        <Footer _total={total} _listSeat={selectedSeat} _prevProps = {[props.cinName,props.room, props.slot]}/>
       </View>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FDFCF0',
-  },
-  screen: {
-    textAlign: 'center',
-    margin: 20,
-  },
-  seat_container: {
-    border: 2,
-    height: 35,
-    width: 35,
-    margin: 2,
-  },
-  text: {
-    textAlign: 'center'
-  },
-  seat: {
-    borderWidth: 2,
-    flex: 1
-  },
-  description:{
-    justifyContent: 'center',
-    flex: 0.2,
-    marginTop: 20,
-    flexDirection: "row",
-   
-  },
-
-});
-
-const footer = StyleSheet.create({
-  container: {
-    borderWidth: 1,
-    flex: 0.5,
-  },
-  click_btn: {
-    marginLeft: 2,
-    marginRight: 2,
-    marginVertical: 65,
-    borderRadius: 20,
-    flex: 1.5,
-    justifyContent: 'center',
-    backgroundColor: '#343433',
-  },
-  text_box: {
-    marginLeft: 5,
-    flex: 2,
-    justifyContent: 'center',
-  },
-})
 export default BookSeat;

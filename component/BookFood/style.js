@@ -10,6 +10,8 @@ const styles = StyleSheet.create({
         flex: 0.7,
         backgroundColor:'pink',
         backgroundColor: '#FDFCF0',
+        borderBottomWidth: 2,
+        borderColor: 'black'
     },
     footer:{
         flex: 0.3,
@@ -19,14 +21,13 @@ const styles = StyleSheet.create({
     food_container: {
         backgroundColor: '#222222',
         flexDirection: 'row',
-        height: 100,
+        height: 120,
         borderColor: 'white',
         borderWidth: 1,
         flex:1 ,
     },
     food_img_container: {
-        backgroundColor:'red',
-        width: 100,
+        width: 80,
         margin: 10,
     },
     food_img: {
@@ -39,10 +40,12 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     food_textbox_header:{
+        fontWeight: 'bold',
         color: 'white',
-        fontSize: 15,
+        fontSize: 14,
     },
     food_textbox_body: {
+        marginTop: 10,
         color: 'white',
         fontSize: 10,
     },
@@ -56,7 +59,8 @@ const styles = StyleSheet.create({
     ////////////////////////////////
     footer_text_box:{
         marginLeft: 5,
-        flex: 2,
+        flex: 0.8,
+        borderBottomWidth:1,
         //justifyContent: 'center',
     },
     footer_click_btn: {
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
         marginRight: 2,
         marginVertical: 65,
         borderRadius: 20,
-        flex: 0.3,
+        flex: 0.2,
         justifyContent: 'center',
         backgroundColor: '#343433',
     },
